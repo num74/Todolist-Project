@@ -41,16 +41,16 @@
   </div>
 </div>
 
-<div class="thisweak">
+<div class="thisweek">
   <div class="box" id="heading">
     <h1>
-      <%= thisWeakListTitle %>
+      <%= thisWeekListTitle %>
     </h1>
   </div>
 
 
   <div class="box">
-    <% for(let item of thisWeakListItems){%>
+    <% for(let item of thisWeekListItems){%>
       <div class="item">
         <form action="/delete" method="post">
           <input type="checkbox" onchange="this.form.submit()" name="deleteItemId" value="<%= item.id %>">
@@ -72,9 +72,9 @@
       </div>
       <% } %>
 
-        <form class="item" action="/addThisWeak" method="post">
+        <form class="item" action="/addThisWeek" method="post">
           <input type="text" name="newItem" placeholder="New Item" autocomplete="off" autofocus="true" />
-          <button class="add" type="submit" name="list" value=<%=thisWeakListTitle %> >+</button>
+          <button class="add" type="submit" name="list" value=<%=thisWeekListTitle %> >+</button>
         </form>
   </div>
 </div>

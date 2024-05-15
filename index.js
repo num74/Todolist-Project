@@ -33,11 +33,11 @@ app.get("/", async (req, res) => {
       "SELECT * FROM items WHERE term = 'Today' ORDER BY id ASC"
     );
     // データベースから今週のtodoを取得
-    const thisWeakResult = await db.query(
-      "SELECT * FROM items WHERE term = 'ThisWeak' ORDER BY id ASC"
+    const thisWeekResult = await db.query(
+      "SELECT * FROM items WHERE term = 'ThisWeek' ORDER BY id ASC"
     );
     let todayItems = todayResult.rows;
-    let thisWeakItems = thisWeakResult.rows;
+    let thisWeekItems = thisWeekResult.rows;
 
     // World Time APIを使用して東京の現在の日時を取得
     const response = await axios.get("http://worldtimeapi.org/api/timezone/Asia/Tokyo");
@@ -47,8 +47,8 @@ app.get("/", async (req, res) => {
     res.render("index.ejs", {
       todayListTitle: "Today",
       todayListItems: todayItems,
-      thisWeakListTitle: "ThisWeak",
-      thisWeakListItems: thisWeakItems,
+      thisWeekListTitle: "ThisWeek",
+      thisWeekListItems: thisWeekItems,
       timeApi: dateTime
     });
   } catch (err) {
@@ -70,12 +70,12 @@ app.post("/addToday", async (req, res) => {
   }
 });
 
-app.post("/addThisWeak", async (req, res) => {
+app.post("/addThisWeek", async (req, res) => {
   const item = req.body.newItem;
   try {
     await db.query("INSERT INTO items (title, term) VALUES ($1, $2)", [
       item,
-      "ThisWeak",
+      "ThisWeek",
     ]);
     res.redirect("/");
   } catch (err) {
